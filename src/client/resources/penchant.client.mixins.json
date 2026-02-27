@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "keymapping.KeyEntryMixin",
+    "keymapping.KeyMappingAccessor",
     "keymapping.KeyMappingMixin",
     "leveling.BitmapProviderMixin",
     "leveling.EnchantmentScreenMixin"
