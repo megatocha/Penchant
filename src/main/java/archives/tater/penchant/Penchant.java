@@ -71,8 +71,8 @@ public class Penchant implements ModInitializer {
             PenchantmentDefinition.buildCache(server.registryAccess())
         );
 
-        PayloadTypeRegistry.playS2C().register(UnlockedEnchantmentsPayload.TYPE, UnlockedEnchantmentsPayload.CODEC);
-        PayloadTypeRegistry.playC2S().register(EnchantPayload.TYPE, EnchantPayload.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(UnlockedEnchantmentsPayload.TYPE, UnlockedEnchantmentsPayload.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(EnchantPayload.TYPE, EnchantPayload.CODEC);
 
         ServerPlayNetworking.registerGlobalReceiver(EnchantPayload.TYPE, (payload, context) -> {
             if (!(context.player().containerMenu instanceof PenchantmentMenu menu)) {

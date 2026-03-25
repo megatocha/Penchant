@@ -1,6 +1,6 @@
 package archives.tater.penchant.client.gui;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
@@ -73,7 +73,7 @@ public class ScrollbarComponent {
         return y + getScrollerYOffset();
     }
 
-    public void render(GuiGraphics guiGraphics) {
+    public void render(GuiGraphicsExtractor guiGraphics) {
         if (!canScroll()) return;
         guiGraphics.blitSprite(
                 RenderPipelines.GUI_TEXTURED,

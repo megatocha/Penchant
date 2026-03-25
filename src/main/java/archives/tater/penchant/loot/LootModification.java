@@ -70,8 +70,8 @@ public record LootModification(
         ).apply(instance, LootPoolPatch::new));
 
         public void apply(LootPool.Builder builder) {
-            builder.with(entries);
-            builder.conditionally(conditions);
+            builder.add(entries);
+            builder.when(conditions);
             builder.apply(functions);
         }
     }

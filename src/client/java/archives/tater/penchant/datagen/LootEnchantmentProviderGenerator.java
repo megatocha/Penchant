@@ -1,6 +1,6 @@
 package archives.tater.penchant.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 
 import net.minecraft.core.HolderLookup;
@@ -12,7 +12,7 @@ import net.minecraft.world.item.enchantment.providers.VanillaEnchantmentProvider
 import java.util.concurrent.CompletableFuture;
 
 public class LootEnchantmentProviderGenerator extends FabricDynamicRegistryProvider {
-    public LootEnchantmentProviderGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public LootEnchantmentProviderGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

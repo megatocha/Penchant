@@ -16,8 +16,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 public class CreativeModeTabsMixin {
     @WrapOperation(
             method = {
-                    "method_59969",
-                    "method_59972",
+                    "lambda$generateEnchantmentBookTypesAllLevels$0",
+                    "lambda$generateEnchantmentBookTypesOnlyMaxLevel$0",
             },
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/Enchantment;getMaxLevel()I")
     )

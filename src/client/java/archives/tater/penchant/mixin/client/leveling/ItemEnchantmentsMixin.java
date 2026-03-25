@@ -38,7 +38,7 @@ import java.util.function.Consumer;
 public class ItemEnchantmentsMixin {
     @Shadow
     @Final
-    Object2IntOpenHashMap<Holder<Enchantment>> enchantments;
+    private Object2IntOpenHashMap<Holder<Enchantment>> enchantments;
 
     @Inject(
             method = "addToTooltip",

@@ -3,7 +3,7 @@ package archives.tater.penchant.datagen;
 import archives.tater.penchant.enchantment.UnbreakableEffect;
 import archives.tater.penchant.registry.PenchantEnchantments;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 
 import net.minecraft.advancements.criterion.MinMaxBounds;
@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class DurabilityEnchantmentGenerator extends FabricDynamicRegistryProvider {
 
-    public DurabilityEnchantmentGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public DurabilityEnchantmentGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

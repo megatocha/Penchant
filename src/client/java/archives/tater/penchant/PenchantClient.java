@@ -10,7 +10,7 @@ import archives.tater.penchant.network.UnlockedEnchantmentsPayload;
 import archives.tater.penchant.registry.PenchantMenus;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
@@ -31,7 +31,7 @@ import static net.minecraft.util.Util.makeDescriptionId;
 
 public class PenchantClient implements ClientModInitializer {
     private static KeyMappingExt keybind(Identifier id, int key, KeyMapping.Category category) {
-        return (KeyMappingExt) KeyBindingHelper.registerKeyBinding(new KeyMappingExt(makeDescriptionId("key", id), Type.KEYSYM, key, category));
+        return (KeyMappingExt) KeyMappingHelper.registerKeyMapping(new KeyMappingExt(makeDescriptionId("key", id), Type.KEYSYM, key, category));
     }
 
     private static final KeyMapping.Category PENCHANT_CATEGORY = KeyMapping.Category.register(Penchant.id(Penchant.MOD_ID));

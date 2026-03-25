@@ -5,7 +5,7 @@ import archives.tater.penchant.advancement.ExtractEnchantmentTrigger;
 import archives.tater.penchant.advancement.OpenTableTrigger;
 import archives.tater.penchant.registry.PenchantAdvancements;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 
 import net.minecraft.advancements.AdvancementHolder;
@@ -32,7 +32,7 @@ public class TableAdvancementGenerator extends FabricAdvancementProvider {
     public static final Identifier BABEL = Penchant.id("babel");
     public static final Identifier EXTRACT_ENCHANTMENT = Penchant.id("extract_enchantment");
 
-    public TableAdvancementGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public TableAdvancementGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 

@@ -2,7 +2,7 @@ package archives.tater.penchant.datagen;
 
 import archives.tater.penchant.registry.PenchantEnchantmentTags;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.EnchantmentTagsProvider;
@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class EnchantmentTagGenerator extends EnchantmentTagsProvider {
 
-    public EnchantmentTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public EnchantmentTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

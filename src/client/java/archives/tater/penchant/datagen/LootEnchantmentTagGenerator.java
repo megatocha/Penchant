@@ -2,7 +2,7 @@ package archives.tater.penchant.datagen;
 
 import archives.tater.penchant.Penchant;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -68,7 +68,7 @@ public class LootEnchantmentTagGenerator extends EnchantmentTagsProvider {
             Enchantments.LURE
     );
 
-    public LootEnchantmentTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public LootEnchantmentTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

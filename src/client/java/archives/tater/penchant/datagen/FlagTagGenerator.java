@@ -3,15 +3,15 @@ package archives.tater.penchant.datagen;
 import archives.tater.penchant.registry.PenchantFlag;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 
 import net.minecraft.core.HolderLookup;
 
 import java.util.concurrent.CompletableFuture;
 
-public abstract class FlagTagGenerator extends FabricTagProvider<PenchantFlag> {
-    public FlagTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public abstract class FlagTagGenerator extends FabricTagsProvider<PenchantFlag> {
+    public FlagTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, PenchantFlag.REGISTRY_KEY, registriesFuture);
     }
 

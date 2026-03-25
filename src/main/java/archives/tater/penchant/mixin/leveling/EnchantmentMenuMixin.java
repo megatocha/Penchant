@@ -15,7 +15,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 @Mixin(EnchantmentMenu.class)
 public class EnchantmentMenuMixin {
     @WrapOperation(
-            method = "method_17410",
+            method = "lambda$clickMenuButton$0",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;enchant(Lnet/minecraft/core/Holder;I)V")
     )
     private void levelOne(ItemStack instance, Holder<Enchantment> enchantment, int level, Operation<Void> original) {

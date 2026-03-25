@@ -3,7 +3,7 @@ package archives.tater.penchant.datagen;
 import archives.tater.penchant.Penchant;
 import archives.tater.penchant.loot.LootModification;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 
 import net.minecraft.core.HolderLookup;
@@ -29,7 +29,7 @@ import static net.minecraft.world.level.storage.loot.entries.LootItem.lootTableI
 import static net.minecraft.world.level.storage.loot.providers.number.ConstantValue.exactly;
 
 public class LootModificationGenerator extends FabricDynamicRegistryProvider {
-    public LootModificationGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public LootModificationGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

@@ -11,7 +11,7 @@ import net.minecraft.tags.TagKey;
 
 public class PenchantFlag {
     public static final ResourceKey<Registry<PenchantFlag>> REGISTRY_KEY = ResourceKey.createRegistryKey(Penchant.id("flag"));
-    public static final Registry<PenchantFlag> REGISTRY = FabricRegistryBuilder.createSimple(REGISTRY_KEY).buildAndRegister();
+    public static final Registry<PenchantFlag> REGISTRY = FabricRegistryBuilder.create(REGISTRY_KEY).buildAndRegister();
     public static final TagKey<PenchantFlag> ENABLED = TagKey.create(REGISTRY_KEY, Penchant.id("enabled"));
 
     private final Identifier id;

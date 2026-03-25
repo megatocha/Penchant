@@ -8,7 +8,7 @@ import archives.tater.penchant.menu.PenchantmentMenu;
 import archives.tater.penchant.util.PenchantmentHelper;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CyclingSlotBackground;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -35,7 +35,7 @@ import static net.minecraft.util.Mth.lerp;
 
 public class PenchantmentScreen extends AbstractContainerScreen<PenchantmentMenu> {
     private static final Identifier TEXTURE = Penchant.id("textures/gui/container/enchanting_table.png");
-    private static final Identifier BOOK_TEXTURE = Identifier.withDefaultNamespace("textures/entity/enchanting_table_book.png");
+    private static final Identifier BOOK_TEXTURE = Identifier.withDefaultNamespace("textures/entity/enchantment/enchanting_table_book.png");
     private static final Identifier SCROLLLER_TEXTURE = Penchant.id("container/enchanting_table/scroller");
     private static final AtlasSprite BOOK_ICON_TEXTURE = new AtlasSprite(AtlasIds.GUI, Penchant.id("container/enchanting_table/book"));
     private static final AtlasSprite GRINDSTONE_ICON_TEXTURE = new AtlasSprite(AtlasIds.GUI, Penchant.id("container/enchanting_table/grindstone"));
@@ -77,9 +77,7 @@ public class PenchantmentScreen extends AbstractContainerScreen<PenchantmentMenu
     private ItemStack last = ItemStack.EMPTY;
 
     public PenchantmentScreen(PenchantmentMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title);
-        imageWidth = 206;
-        imageHeight = 172;
+        super(menu, playerInventory, title, 206, 172);
         inventoryLabelX = 23;
         inventoryLabelY = imageHeight - 94;
         menu.setSlotChangeListener(this::rebuildWidgets);
@@ -164,11 +162,13 @@ public class PenchantmentScreen extends AbstractContainerScreen<PenchantmentMenu
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractBackground(graphics, mouseX, mouseY, a);
+
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
-        renderBook(guiGraphics, x, y);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
+        renderBook(graphics, x, y);
 
         var font = Minecraft.getInstance().font;
         var infoText = Component.object(BOOK_ICON_TEXTURE)
@@ -178,14 +178,14 @@ public class PenchantmentScreen extends AbstractContainerScreen<PenchantmentMenu
                 .append(Component.object(GRINDSTONE_ICON_TEXTURE))
                 .append(FontUtils.THIN_SPACE_TEXT)
                 .append(menu.hasDisenchanter() ? "✔" : "❌");
-        guiGraphics.drawString(font, infoText, leftPos + 32 - font.width(infoText) / 2, topPos + 18, 0xFF606060, false);
+        graphics.text(font, infoText, leftPos + 32 - font.width(infoText) / 2, topPos + 18, 0xFF606060, false);
 
-        secondSlotBackground.render(menu, guiGraphics, partialTick, leftPos, topPos);
+        secondSlotBackground.extractRenderState(menu, graphics, a, leftPos, topPos);
 
-        scrollbar.render(guiGraphics);
+        scrollbar.render(graphics);
     }
 
-    private void renderBook(GuiGraphics guiGraphics, int x, int y) {
+    private void renderBook(GuiGraphicsExtractor guiGraphics, int x, int y) {
         var partialTick = minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(false);
         var open = lerp(partialTick, oOpen, this.open);
         var flip = lerp(partialTick, oFlip, this.flip);
@@ -193,17 +193,16 @@ public class PenchantmentScreen extends AbstractContainerScreen<PenchantmentMenu
         var y0 = y + 25;
         var x1 = x0 + 38;
         var y1 = y0 + 31;
-        guiGraphics.submitBookModelRenderState(requireNonNull(bookModel), BOOK_TEXTURE, 40.0F, open, flip, x0, y0, x1, y1);
+        guiGraphics.book(requireNonNull(bookModel), BOOK_TEXTURE, 40.0F, open, flip, x0, y0, x1, y1);
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         var gamePartialTick = minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(false);
-        super.render(guiGraphics, mouseX, mouseY, gamePartialTick);
+        super.extractRenderState(graphics, mouseX, mouseY, gamePartialTick);
 
-        if (hoveredSlot != null && !hoveredSlot.hasItem())
-            guiGraphics.setTooltipForNextFrame(font, font.split(
+        if (hoveredSlot != null && !hoveredSlot.hasItem() && hoveredSlot.index <= 1)
+            graphics.setTooltipForNextFrame(font, font.split(
                     hoveredSlot.index == 0
                             ? ENCHANTING_SLOT_TOOLTIP
                             : menu.canDisenchant()
@@ -211,7 +210,7 @@ public class PenchantmentScreen extends AbstractContainerScreen<PenchantmentMenu
                                     : INGREDIENT_SLOT_TOOLTIP,
                     TOOLTIP_WIDTH), mouseX, mouseY);
         else
-            renderTooltip(guiGraphics, mouseX, mouseY);
+            extractTooltip(graphics, mouseX, mouseY);
     }
 
     public void tickBook() {

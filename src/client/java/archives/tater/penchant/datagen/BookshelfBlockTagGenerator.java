@@ -1,7 +1,7 @@
 package archives.tater.penchant.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.tags.BlockTags;
@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
-public class BookshelfBlockTagGenerator extends FabricTagProvider.BlockTagProvider {
-    public BookshelfBlockTagGenerator(FabricDataOutput output, CompletableFuture<Provider> registriesFuture) {
+public class BookshelfBlockTagGenerator extends FabricTagsProvider.BlockTagsProvider {
+    public BookshelfBlockTagGenerator(FabricPackOutput output, CompletableFuture<Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.WidgetSprites;
@@ -140,15 +140,15 @@ public class EnchantmentSlotWidget extends AbstractButton {
     }
 
     @Override
-    protected void renderContents(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, TEXTURES.get(active, isHovered()), getX(), getY(), getWidth(), getHeight());
+    protected void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, TEXTURES.get(active, isHovered()), getX(), getY(), getWidth(), getHeight());
 
         var font = Minecraft.getInstance().font;
 
-        guiGraphics.drawString(font, text, getX() + 2, getY() + 2, active && isHovered ? 0xFFFCFC7E : isCurse ? 0xFF891d13 : 0xFF332E25, false);
+        graphics.text(font, text, getX() + 2, getY() + 2, active && isHovered ? 0xFFFCFC7E : isCurse ? 0xFF891d13 : 0xFF332E25, false);
 
         if (costText != null)
-            guiGraphics.drawString(font, costText, getX() + width - 2 - font.width(costText), getY() + 2, 0xFF404040, true);
+            graphics.text(font, costText, getX() + width - 2 - font.width(costText), getY() + 2, 0xFF404040, true);
     }
 
     @Override

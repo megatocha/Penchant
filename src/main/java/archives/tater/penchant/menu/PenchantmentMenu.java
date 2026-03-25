@@ -228,7 +228,7 @@ public class PenchantmentMenu extends AbstractContainerMenu {
                 if (player instanceof ServerPlayer serverPlayer)
                     CriteriaTriggers.ENCHANTED_ITEM.trigger(serverPlayer, result, levelCost);
 
-                level.playSound(null, pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.0F, level.random.nextFloat() * 0.1F + 0.9F);
+                level.playSound(null, pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
                 enchantSlots.setChanged();
             });
         } else if (isDisenchanting()) {
@@ -256,7 +256,7 @@ public class PenchantmentMenu extends AbstractContainerMenu {
                 if (player instanceof ServerPlayer serverPlayer)
                     PenchantAdvancements.EXTRACT_ENCHANTMENT.trigger(serverPlayer, newStack, enchantment);
 
-                level.playSound(null, pos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1.0F, level.random.nextFloat() * 0.1F + 0.9F);
+                level.playSound(null, pos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
                 enchantSlots.setChanged();
             });
         } else

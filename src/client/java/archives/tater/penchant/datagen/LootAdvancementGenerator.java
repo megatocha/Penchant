@@ -2,7 +2,7 @@ package archives.tater.penchant.datagen;
 
 import archives.tater.penchant.Penchant;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 
 import net.minecraft.advancements.AdvancementHolder;
@@ -31,7 +31,7 @@ public class LootAdvancementGenerator extends FabricAdvancementProvider {
 
     public static final Identifier ALL_ENCHANTMENTS = Penchant.id("all_enchantments");
 
-    public LootAdvancementGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    public LootAdvancementGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup);
     }
 

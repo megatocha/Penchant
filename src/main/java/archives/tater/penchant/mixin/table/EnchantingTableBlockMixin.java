@@ -24,7 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
 @Mixin(EnchantingTableBlock.class)
 public class EnchantingTableBlockMixin {
     @ModifyReturnValue(
-            method = "method_17467",
+            method = "lambda$getMenuProvider$0",
             at = @At("RETURN")
     )
     private static AbstractContainerMenu replaceMenu(AbstractContainerMenu original, @Local(argsOnly = true) int syncId, @Local(argsOnly = true) Inventory inventory, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos) {
