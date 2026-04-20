@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -20,10 +20,11 @@ import java.util.function.Consumer;
 public abstract class ItemStackMixin {
     @Inject(
             at = @At("HEAD"),
-            method = "hurtAndBreak(ILnet/minecraft/server/level/ServerLevel;Lnet/minecraft/server/level/ServerPlayer;Ljava/util/function/Consumer;)V",
+            method = "hurtAndBreak(ILnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V",
+            remap = false,
             order = 500 // before enderscape
     )
-	private void updateProgress(int damage, ServerLevel level, @Nullable ServerPlayer player, Consumer<Item> onBreak, CallbackInfo ci) {
+	private void updateProgress(int damage, ServerLevel level, @Nullable LivingEntity player, Consumer<Item> onBreak, CallbackInfo ci) {
         EnchantmentProgress.onDurabilityDamage((ItemStack) (Object) this, player);
 	}
 }
