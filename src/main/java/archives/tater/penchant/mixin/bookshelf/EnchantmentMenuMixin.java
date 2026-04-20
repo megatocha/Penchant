@@ -2,17 +2,14 @@ package archives.tater.penchant.mixin.bookshelf;
 
 import archives.tater.penchant.util.PenchantmentHelper;
 
-import com.llamalad7.mixinextras.expression.Definition;
-import com.llamalad7.mixinextras.expression.Expression;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.inventory.EnchantmentMenu;
@@ -35,16 +32,15 @@ public class EnchantmentMenuMixin {
         return true;
     }
 
-    @Definition(id = "i", local = @Local(type = int.class, ordinal = 0))
-    @Expression("i = i + @(1)")
-    @ModifyExpressionValue(
+    @ModifyVariable(
             method = "method_17411",
-            at = @At("MIXINEXTRAS:EXPRESSION")
+            at = @At("STORE"),
+            ordinal = 0
     )
-    private int modifyCount(int original, @Share("chiseledBookCount") LocalIntRef chiseledBookCount, @Share("isChiseledBookshelf") LocalBooleanRef isChiseledBookshelf) {
-        if (!isChiseledBookshelf.get()) return original;
+    private int modifyCount(int i, @Share("chiseledBookCount") LocalIntRef chiseledBookCount, @Share("isChiseledBookshelf") LocalBooleanRef isChiseledBookshelf) {
+        if (!isChiseledBookshelf.get()) return i;
         var scoreIncrease = chiseledBookCount.get() / 3;
         chiseledBookCount.set(chiseledBookCount.get() % 3);
-        return scoreIncrease;
+        return scoreIncrease - 1; // Already increased by 1
     }
 }

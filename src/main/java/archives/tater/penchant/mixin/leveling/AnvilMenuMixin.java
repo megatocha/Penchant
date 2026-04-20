@@ -4,8 +4,6 @@ import archives.tater.penchant.component.EnchantmentProgress;
 import archives.tater.penchant.registry.PenchantComponents;
 import archives.tater.penchant.registry.PenchantEnchantmentTags;
 
-import com.llamalad7.mixinextras.expression.Expression;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -37,13 +35,15 @@ public abstract class AnvilMenuMixin {
             progress.set(result.getOrDefault(PenchantComponents.ENCHANTMENT_PROGRESS, EnchantmentProgress.EMPTY).toMutable());
     }
 
-    @Expression("? + 1")
-    @ModifyExpressionValue(
+    @WrapOperation(
             method = "createResult",
-            at = @At("MIXINEXTRAS:EXPRESSION")
+            at = @At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/objects/Object2IntMap$Entry;getIntValue()I")
     )
-    private int noIncreasePair(int original, @Local Holder<Enchantment> enchantment) {
-        return enchantment.is(PenchantEnchantmentTags.NO_LEVELING) ? original : original - 1;
+    private int noIncreasePair(Entry<Holder<Enchantment>> instance, Operation<Integer> original, @Local ItemEnchantments.Mutable mutable) {
+        var enchantment = instance.getKey();
+        var originalResult = original.call(instance);
+        return enchantment.is(PenchantEnchantmentTags.NO_LEVELING) ? originalResult :
+                originalResult > mutable.getLevel(enchantment) ? originalResult : 0;
     }
 
     @WrapOperation(

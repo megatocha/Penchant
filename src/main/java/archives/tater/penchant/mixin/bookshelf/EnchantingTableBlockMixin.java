@@ -3,14 +3,11 @@ package archives.tater.penchant.mixin.bookshelf;
 import archives.tater.penchant.registry.PenchantFlag;
 import archives.tater.penchant.util.PenchantmentHelper;
 
-import com.llamalad7.mixinextras.expression.Definition;
-import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-
 import org.objectweb.asm.Opcodes;
 
 import net.minecraft.core.BlockPos;
@@ -23,13 +20,9 @@ import java.util.List;
 
 @Mixin(EnchantingTableBlock.class)
 public class EnchantingTableBlockMixin {
-    @Definition(id = "is", method = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z")
-    @Definition(id = "getBlockState", method = "Lnet/minecraft/world/level/Level;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;")
-    @Definition(id = "offset", method = "Lnet/minecraft/core/BlockPos;offset(Lnet/minecraft/core/Vec3i;)Lnet/minecraft/core/BlockPos;")
-    @Expression("?.getBlockState(?.offset(?)).is(?)")
     @WrapOperation(
             method = "isValidBookShelf",
-            at = @At("MIXINEXTRAS:EXPRESSION")
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z", ordinal = 0)
     )
     private static boolean checkChiseled(BlockState instance, TagKey<Block> tagKey, Operation<Boolean> original) {
         if (!original.call(instance, tagKey)) return false;
@@ -44,12 +37,9 @@ public class EnchantingTableBlockMixin {
         return PenchantmentHelper.getBookshelfOffsets(original);
     }
 
-    @Definition(id = "is", method = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z")
-    @Definition(id = "ENCHANTMENT_POWER_TRANSMITTER", field = "Lnet/minecraft/tags/BlockTags;ENCHANTMENT_POWER_TRANSMITTER:Lnet/minecraft/tags/TagKey;")
-    @Expression("?.is(ENCHANTMENT_POWER_TRANSMITTER)")
     @ModifyExpressionValue(
             method = "isValidBookShelf",
-            at = @At("MIXINEXTRAS:EXPRESSION")
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z", ordinal = 1)
     )
     private static boolean allowObstruction(boolean original) {
         return original || PenchantFlag.LENIENT_BOOKSHELF_PLACEMENT.isEnabled();
