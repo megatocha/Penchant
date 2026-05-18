@@ -12,6 +12,7 @@
     "minecraft:riptide",
     "minecraft:thorns",
     "minecraft:infinity",
-    "minecraft:multishot"
+    "minecraft:multishot",
+    "veinminer-enchantment:veinminer?"
   ]
 }
