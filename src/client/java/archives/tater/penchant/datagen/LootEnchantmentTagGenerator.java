@@ -68,6 +68,10 @@ public class LootEnchantmentTagGenerator extends EnchantmentTagsProvider {
             Enchantments.LURE
     );
 
+    private static final ResourceKey<Enchantment> createKey(String namespace, String path) {
+        return ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(namespace, path));
+    }
+
     public LootEnchantmentTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
@@ -80,12 +84,12 @@ public class LootEnchantmentTagGenerator extends EnchantmentTagsProvider {
 
         tag(rare)
                 .addAll(RARE)
-                .addOptional(ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath("veinminer-enchantment", "veinminer")))
-                .addOptional(ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath("veinminer_enchantment", "veinminer")));
+                .addOptional(createKey("veinminer-enchantment", "veinminer"))
+                .addOptional(createKey("veinminer_enchantment", "veinminer"));
 
         tag(uncommon)
                 .addAll(UNCOMMON)
-                .addOptional(ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath("farmersdelight", "backstabbing")));
+                .addOptional(createKey("farmersdelight", "backstabbing"));
 
         tag(common)
                 .addAll(COMMON);
