@@ -4,7 +4,7 @@ import archives.tater.penchant.Penchant;
 import archives.tater.penchant.advancement.ExtractEnchantmentTrigger;
 import archives.tater.penchant.advancement.OpenTableTrigger;
 
-import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.advancements.triggers.CriterionTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 

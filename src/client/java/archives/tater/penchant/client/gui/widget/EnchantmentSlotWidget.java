@@ -20,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.network.chat.FontDescription;
 import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.item.enchantment.Enchantment;
 
@@ -39,7 +40,7 @@ public class EnchantmentSlotWidget extends AbstractButton {
             Penchant.id("container/enchanting_table/slot_disabled"),
             Penchant.id("container/enchanting_table/slot_highlighted")
     );
-    public static final FontDescription.Resource ALT_FONT = new FontDescription.Resource(Minecraft.ALT_FONT);
+    public static final FontDescription.Resource ALT_FONT = new FontDescription.Resource(Identifier.withDefaultNamespace("alt"));
 
     public static final int DISABLED_COLOR = 0xFF685E4A;
     public static final int INSUFFICIENT_COLOR = 0xffff5555;

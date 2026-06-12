@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.references.BlockItemIds;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -17,7 +17,7 @@ public class BlockTagGenerator extends FabricTagsProvider.BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
-        valueLookupBuilder(PenchantBlockTags.DISENCHANTER)
-                .add(Blocks.GRINDSTONE);
+        builder(PenchantBlockTags.DISENCHANTER)
+                .add(BlockItemIds.GRINDSTONE);
     }
 }
