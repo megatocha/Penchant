@@ -6,7 +6,7 @@
   "key.penchant.show_progress": "Показать прогресс зачарования",
   "container.penchant.enchant.slot.enchant": "Добавьте снаряжение, чтобы зачаровать",
   "container.penchant.enchant.slot.ingredient": "Добавьте лазурит, чтобы зачаровать",
-  "container.penchant.enchant.slot.ingredient.disenchant": "Добавьте лазурит чтобы зачаровать или книгу для разчарования",
+  "container.penchant.enchant.slot.ingredient.disenchant": "Добавьте лазурит чтобы зачаровать или книгу чтобы снять зачарование",
   "widget.penchant.enchantment_slot.incompatible": "!",
   "widget.penchant.enchantment_slot.tooltip.added": "Добавлено",
   "widget.penchant.enchantment_slot.tooltip.name_locked": "...?",
