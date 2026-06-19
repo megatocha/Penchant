@@ -1,5 +1,0 @@
-{
-  "function": "minecraft:enchant_randomly",
-  "options": "#minecraft:on_random_loot",
-  "conditions": []
-}
