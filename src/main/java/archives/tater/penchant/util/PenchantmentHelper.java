@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.max;
 
 public class PenchantmentHelper {
     public static final boolean ITEM_DESCRIPTIONS_INSTALLED = FabricLoader.getInstance().isModLoaded("item_descriptions");
@@ -52,7 +51,7 @@ public class PenchantmentHelper {
     }
 
     public static int getProgressCostFactor(Holder<Enchantment> enchantment, int targetLevel) {
-        return max(PenchantmentDefinition.getDefinition(enchantment).progressCostFactor().calculate(targetLevel), 1);
+        return PenchantmentDefinition.getDefinition(enchantment).getProgressCostFactor(targetLevel);
     }
 
     public static int getBookRequirement(Holder<Enchantment> enchantment) {
