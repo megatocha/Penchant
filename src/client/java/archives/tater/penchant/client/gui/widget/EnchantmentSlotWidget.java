@@ -105,7 +105,7 @@ public class EnchantmentSlotWidget extends AbstractButton {
 
             if (!incompatible.isEmpty()) tooltip
                     .append(Component.literal("\n"))
-                    .append(Component.translatable("widget.penchant.enchantment_slot.tooltip.incompatible", ComponentUtils.formatList(incompatible, holder -> holder.value().description()))
+                    .append(Component.translatable("widget.penchant.enchantment_slot.tooltip.incompatible", ComponentUtils.formatList(incompatible, Component.literal(", "), holder -> holder.value().description()))
                             .withStyle(ChatFormatting.RED));
 
             if (showBookCost) tooltip

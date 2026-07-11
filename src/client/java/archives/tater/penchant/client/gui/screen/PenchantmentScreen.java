@@ -129,7 +129,9 @@ public class PenchantmentScreen extends AbstractContainerScreen<PenchantmentMenu
     }
 
     private List<Holder<Enchantment>> getIncompatible(ItemStack stack, Holder<Enchantment> enchantment) {
-        return PenchantmentHelper.getEnchantments(stack).keySet().stream().filter(other -> !enchantment.equals(other) && !Enchantment.areCompatible(enchantment, other)).toList();
+        return PenchantmentHelper.hasEnchantment(stack, enchantment) || PenchantmentHelper.canEnchant(stack, enchantment)
+                ? List.of()
+                : PenchantmentHelper.getEnchantments(stack).keySet().stream().filter(other -> !enchantment.equals(other) && !Enchantment.areCompatible(enchantment, other)).toList();
     }
 
     @Override

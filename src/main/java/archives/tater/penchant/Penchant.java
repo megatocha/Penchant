@@ -1,5 +1,6 @@
 package archives.tater.penchant;
 
+import archives.tater.penchant.api.CanEnchantCallback;
 import archives.tater.penchant.loot.LootModification;
 import archives.tater.penchant.menu.PenchantmentMenu;
 import archives.tater.penchant.network.EnchantPayload;
@@ -10,8 +11,11 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.util.TriState;
 
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.EnchantmentTags;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,5 +61,10 @@ public class Penchant implements ModInitializer {
             }
             menu.handleEnchant(payload.enchantment());
         });
+
+        CanEnchantCallback.STACK.register((stack, enchantment) -> enchantment.is(EnchantmentTags.ARMOR_EXCLUSIVE)
+                && EnchantmentHelper.getEnchantmentsForCrafting(stack).keySet().stream().filter(enchantment2 -> enchantment2.is(EnchantmentTags.ARMOR_EXCLUSIVE)).count() < 2
+                ? TriState.TRUE
+                : TriState.DEFAULT);
     }
 }
